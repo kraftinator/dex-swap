@@ -42,30 +42,15 @@ export async function swap(dexWallet: DexWallet, pair: [string, string], reverse
   }
 
   const swapDeadline = Math.floor((Date.now() / 1000) + (60 * 60))
-  /*
-  const swapTxInputs = [
-      tokenAAddress,
-      tokenBAddress,
-      3000n,
-      walletAddress,
-      BigInt(swapDeadline),
-      tokenABalance,
-      0n,
-      0n
-  ]
-
-  const swapTxResponse = await callContractMethod(swapRouterContract, 'exactInputSingle', [swapTxInputs], gasPrice)
-  */
-
-    const swapTxInputs = {
-      tokenIn: tokenAAddress,
-      tokenOut: tokenBAddress,
-      fee: 3000, // Fee tier
-      recipient: walletAddress,
-      deadline: BigInt(swapDeadline), // Deadline as bigint
-      amountIn: tokenABalance, // Token A balance
-      amountOutMinimum: 0n, // Minimum acceptable amount of token B
-      sqrtPriceLimitX96: 0n // No price limit
+  const swapTxInputs = {
+    tokenIn: tokenAAddress,
+    tokenOut: tokenBAddress,
+    fee: 3000, // Fee tier
+    recipient: walletAddress,
+    deadline: BigInt(swapDeadline), // Deadline as bigint
+    amountIn: tokenABalance, // Token A balance
+    amountOutMinimum: 0n, // Minimum acceptable amount of token B
+    sqrtPriceLimitX96: 0n // No price limit
   };
 
   console.log("Swap Transaction Inputs:", swapTxInputs);
