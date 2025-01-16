@@ -28,10 +28,10 @@ export async function callContractMethod(
      * Send the transaction to the contract with gasPrice and gasLimit parameters
      * to ensure the successful completion of the transaction.
      */
-    console.log('***** FLAG A *****')
-    console.log("Method ABI:", contract.interface.getFunction(method));
+    //console.log('***** FLAG A *****')
+    //console.log("Method ABI:", contract.interface.getFunction(method));
     const txResponse = await (contract as any)[method](...inputs, { gasPrice, gasLimit });
-    console.log('***** FLAG B *****')
+    //console.log('***** FLAG B *****')
     console.log('Done! Tx Hash:', txResponse.hash);
     return txResponse;
 }

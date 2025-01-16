@@ -5,7 +5,7 @@ import { callContractMethod } from '../contractUtils'
 import erc20Abi from './contracts/ERC20.json'
 import swapRouterAbi from './contracts/SwapRouter.json'
 
-export async function swap(dexWallet: DexWallet, pair: [string, string], reverse?: boolean) {
+export async function swap(dexWallet: DexWallet, amountIn: Number, pair: [string, string], reverse?: boolean) {
 
   const {
       wallet,
@@ -31,7 +31,7 @@ export async function swap(dexWallet: DexWallet, pair: [string, string], reverse
   
   console.log('Provider gas price:', providerGasPrice)
   const gasPrice: bigint = (providerGasPrice * 12n) / 10n;
-  console.log('  Actual gas price:', gasPrice)
+  console.log('Actual gas price:', gasPrice)
   
   const allowance: bigint = await tokenAContract.allowance(walletAddress, swapRouterAddress)
   console.log('Token A spenditure allowance:', allowance)
@@ -48,7 +48,8 @@ export async function swap(dexWallet: DexWallet, pair: [string, string], reverse
     fee: 3000, // Fee tier
     recipient: walletAddress,
     deadline: BigInt(swapDeadline), // Deadline as bigint
-    amountIn: tokenABalance, // Token A balance
+    //amountIn: tokenABalance, // Token A balance
+    amountIn: amountIn,
     amountOutMinimum: 0n, // Minimum acceptable amount of token B
     sqrtPriceLimitX96: 0n // No price limit
   };
